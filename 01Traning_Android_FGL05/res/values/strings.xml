@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">01_AndroidTrainingFGL04  </string>
+    <string name="action_settings">Settings</string>
+    <string name="edit_message">Enter a Message</string>
+    <string name="button_send">Send</string>
+    <string name="title_activity_display_message">My Message with option menu</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_search">Meine suche</string>
+    <string name="title_activity_display_message_activity_for_result">DisplayMessageActivityForResult</string>
+    <string name="button_send_for_result">Send for result</string>
+
+</resources>

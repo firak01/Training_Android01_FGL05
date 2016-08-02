@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="de.fgl.tryout.android.training001"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="18" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppBaseTheme" >
+        <activity
+            android:name="de.fgl.tryout.android.training001.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="de.fgl.tryout.android.training001.DisplayMessageActivity"
+            android:label="@string/title_activity_display_message"
+            android:parentActivityName="de.fgl.tryout.android.training001.MainActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.fgl.tryout.android.training001.MainActivity" />
+        </activity>
+        <!-- FGL: Damit es aussieht wie ein Dialog, aber: Die Klasse der anzuzeigenden Activity muss von ActionBarActivity nach Activity geändert werden -->
+        <!-- android:theme="@android:style/Theme.Dialog" -->
+        
+        <!-- FGL 20160727: Weiterentwicklung im ...FGL04 Projekt.
+             Diese Activity wird mit .createActivityForResult() aufgerufen. -->
+        <activity
+            android:name="de.fgl.tryout.android.training001.DisplayMessageActivityForResult"
+            android:label="@string/title_activity_display_message_activity_for_result" >
+        </activity>
+    </application>
+
+</manifest>
