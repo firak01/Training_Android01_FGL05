@@ -21,16 +21,6 @@ import android.widget.EditText;
  *
  */
 public class MainActivity extends ActionBarActivity {
-	//public final static String EXTRA_MESSAGE = "de.fgl.tryout.android.training001.MainAcitvity.MESSAGE";
-	//public final static String RESUME_MESSAGE = "de.fgl.tryout.android.training001.MainAcitvity.RESUMEMESSAGE";
-	//public final static String RESUME_MESSAGE_BUNDLE = "de.fgl.tryout.android.training001.MainAcitvity.RESUMEMESSAGEBUNDLE";
-	//private final String KEY_MESSAGE_CURRENT="currentMessage";
-	
-	//Folgende Texte werden beim Zurückkehren aus der "DisplayMessageActivity" an den Sende String gehängt. Je nachdem welcher Weg gewählt wurde.
-	//private final String MESSAGE_ADDITION_VARIABLE="(wiederhergestellt per Variable)";
-	//private final String MESSAGE_ADDITION_BUNDLE="(wiederhergestellt per Intent und Bundle)";
-	//private final String MESSAGE_ADDITION_INTENT="(wiederhergestellt per Intent)";
-	//private final String MESSAGE_ADDITION_RESULT="(als Result)";
 	private String sMessageCurrent;
  
 	protected void onCreate(Bundle savedInstanceState) {

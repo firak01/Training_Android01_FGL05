@@ -4,10 +4,24 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+      <!--     FGL: Weil mit dem SDK Manager die 23er Version installiert wurde, gibt es Fehlermeldungen. Darum die Version 23 hier als Zielversion eintragen -->
+<!--  	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="23" /> -->
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="18" />
+        android:minSdkVersion="16"
+        android:targetSdkVersion="23" />
 
+        <!-- FGL: 
+        Es war notwendig android:theme hinzuzufügen auf Activity Ebene
+        wenn man das auf Application Ebene entfernt.
+        
+        If your Java is using ActionBarActivity the theme must extend Theme.AppCompat. 
+        There are a handful of built in themes that do extend Theme.AppCompat or you could extend it yourself and modify it. 
+        Without removing the ActionBarActivity parent you cannot get around using the Theme.AppCompat.
+
+		Lösung:
+		In styles.xml verwende DarkActionBar
+		<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">		
+-->
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
