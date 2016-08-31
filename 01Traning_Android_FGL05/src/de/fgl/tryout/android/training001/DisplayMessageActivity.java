@@ -62,22 +62,12 @@ public class DisplayMessageActivity extends ActionBarActivity { //Activity
 //			//Style den Hintergrund		
 //			actionBar.setBackgroundDrawable(new ColorDrawable(iColor)); // set your desired color
 		}else{
-Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or higher.");
-			
 			// If your minSdkVersion is 11 or higher, instead use:
 			android.app.ActionBar actionBar = getActionBar();
-			if(actionBar==null){
-				//TODO GOO 20160818: Warum ist Action Bar NULL?
-				Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - action bar IS NULL.");
-				
-			}else{
-			Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - action bar not null.");
-			
-			actionBar.setDisplayHomeAsUpEnabled(true);
+			actionBar.setDisplayHomeAsUpEnabled(true);//To allow Up navigation with the app icon in the action bar
 			
 			//Style den Hintergrund			
-			actionBar.setBackgroundDrawable(new ColorDrawable(iColor)); // set your desired color
-			}		
+			actionBar.setBackgroundDrawable(new ColorDrawable(iColor)); // set your desired color		
 		}
 			
 		
