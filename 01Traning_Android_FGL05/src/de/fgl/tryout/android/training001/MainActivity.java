@@ -2,6 +2,7 @@ package de.fgl.tryout.android.training001;
 
 
 import basic.zBasic.util.datatype.string.StringZZZ;
+import biz.tekeye.abouttest.AboutBox;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -69,8 +70,14 @@ public class MainActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
+		Log.d("FGLSTATE", "onOptionsItemSelected() id='"+id+"'.");
+		
 		if (id == R.id.action_settings) {
 			return true;
+		}
+		if (id == R.id.action_about) {
+			//Original (s.05_TryOut_AndroidCookbook_ .... ) aus einem Button einer Main-Activity-Klasse: AboutBox.Show(Main.this);
+			AboutBox.Show(this);
 		}
 		return super.onOptionsItemSelected(item);
 	}
