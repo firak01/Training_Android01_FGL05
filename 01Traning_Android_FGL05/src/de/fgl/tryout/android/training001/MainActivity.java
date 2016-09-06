@@ -77,7 +77,13 @@ public class MainActivity extends ActionBarActivity {
 		}
 		if (id == R.id.action_about) {
 			//Original (s.05_TryOut_AndroidCookbook_ .... ) aus einem Button einer Main-Activity-Klasse: AboutBox.Show(Main.this);
-			AboutBox.Show(this);
+			//AboutBox.Show(this);
+			
+			//20160906: Hole nun eine von mir überarbeitet Version
+			MyVersionHandler versionHandler = new MyVersionHandler();
+			MyVersionAboutBox versionAboutBox = new MyVersionAboutBox(versionHandler);
+			versionAboutBox.Show(this);
+			
 		}
 		return super.onOptionsItemSelected(item);
 	}
