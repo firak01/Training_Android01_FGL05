@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/myAboutView"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+
+  <LinearLayout
+      android:id="@+id/myAboutLayout"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:padding="0dp" >
+
+      <TextView
+          android:id="@+id/textView1"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="0.88"
+          android:text="TextView" />
+
+      <TextView
+          android:id="@+id/myAboutText"
+          android:layout_width="0dp"
+          android:layout_height="78dp"
+          android:layout_gravity="top"
+          android:layout_weight="0.88"
+          android:enabled="true"
+          android:freezesText="false"
+          android:linksClickable="true"
+          android:scrollHorizontally="false"
+          android:selectAllOnFocus="true"
+          android:textColor="#FFF" />
+
+  </LinearLayout>
+
+</ScrollView>

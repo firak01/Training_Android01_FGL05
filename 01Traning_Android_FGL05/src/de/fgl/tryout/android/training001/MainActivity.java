@@ -22,8 +22,23 @@ import android.widget.EditText;
  *
  */
 public class MainActivity extends ActionBarActivity {
-	private String sMessageCurrent;
+	private String sMessageCurrent=null;
+	private MyVersionAboutBox versionAboutBox = null;
  
+	public MyVersionAboutBox getVersionAboutBox() {
+		if(this.versionAboutBox==null){
+			MyVersionAboutBox a = new MyVersionAboutBox();
+			this.versionAboutBox = a;
+		}
+		return this.versionAboutBox;
+	}
+
+
+	public void setVersionAboutBox(MyVersionAboutBox versionAboutBox) {
+		this.versionAboutBox = versionAboutBox;
+	}
+
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
@@ -76,13 +91,16 @@ public class MainActivity extends ActionBarActivity {
 			return true;
 		}
 		if (id == R.id.action_about) {
+			Log.d("FGLSTATE", "onOptionsItemSelected(): ABOUT BOX");
 			//Original (s.05_TryOut_AndroidCookbook_ .... ) aus einem Button einer Main-Activity-Klasse: AboutBox.Show(Main.this);
 			//AboutBox.Show(this);
 			
 			//20160906: Hole nun eine von mir überarbeitet Version
-			MyVersionHandler versionHandler = new MyVersionHandler();
-			MyVersionAboutBox versionAboutBox = new MyVersionAboutBox(versionHandler);
-			versionAboutBox.Show(this);
+			//MyVersionHandler versionHandler = new MyVersionHandler();
+			//MyVersionAboutBox versionAboutBox = new MyVersionAboutBox(versionHandler);
+			//this.getVersionAboutBox().setVersionHandler(versionHandler);
+			this.getVersionAboutBox().Show(MainActivity.this);
+			//versionAboutBox.Show(this);
 			
 		}
 		return super.onOptionsItemSelected(item);

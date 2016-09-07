@@ -23,11 +23,14 @@ import android.widget.TextView;
 public class MyVersionAboutBox { //extends AboutBox{ aber: Diese AboutBox ist so einfach nicht anpassbar genug
 	 private MyVersionHandler versionHandler=null;
 	 
-	private MyVersionHandler getVersionHandler() {
-		return versionHandler;
+	public MyVersionHandler getVersionHandler() {
+		if(this.versionHandler==null){
+			this.versionHandler=new MyVersionHandler();
+		}
+		return this.versionHandler;
 	}
 
-	private void setVersionHandler(MyVersionHandler versionHandler) {
+	public void setVersionHandler(MyVersionHandler versionHandler) {
 		this.versionHandler = versionHandler;
 	}
 
@@ -41,6 +44,9 @@ public class MyVersionAboutBox { //extends AboutBox{ aber: Diese AboutBox ist so
 		this.callingActivity = callingActivity;
 	}
 
+	public MyVersionAboutBox(){
+		
+	}
 	public MyVersionAboutBox(MyVersionHandler objVersionHandler){
 		 this.setVersionHandler(objVersionHandler);
 	 }
@@ -54,7 +60,7 @@ public class MyVersionAboutBox { //extends AboutBox{ aber: Diese AboutBox ist so
 		  }
 	      //nicht mehr static machen
 		  public void Show(Activity callingActivity) {
-			  this.callingActivity = callingActivity;
+			  this.setCallingActivity(callingActivity);
 			  
 			  String aboutText = this.computeVersionString();
 			  Log.d("FGLTEST", "Methode Show() aboutText = " + aboutText);
@@ -63,27 +69,39 @@ public class MyVersionAboutBox { //extends AboutBox{ aber: Diese AboutBox ist so
 		    //Generate views to pass to AlertDialog.Builder and to set the text
 		    View about;
 		    TextView tvAbout;
+		    LayoutInflater inflater = null;
 		    try {
 		      //Inflate the custom view
-		      LayoutInflater inflater = callingActivity.getLayoutInflater();
-		      about = inflater.inflate(R.layout.aboutbox, (ViewGroup) callingActivity.findViewById(R.id.aboutView));
-		      tvAbout = (TextView) about.findViewById(R.id.aboutText);
+		      inflater = this.getCallingActivity().getLayoutInflater();
+		     // about = inflater.inflate(R.layout.aboutbox, (ViewGroup) callingActivity.findViewById(R.id.aboutView));
+		      about = inflater.inflate(R.layout.myversionaboutbox, (ViewGroup) this.getCallingActivity().findViewById(R.id.myAboutView));
+		      //tvAbout = (TextView) about.findViewById(R.id.myAboutText);		
+		      tvAbout = (TextView) about.findViewById(R.id.textView1);
 		    } catch(InflateException e) {
 		      //Inflater can throw exception, unlikely but default to TextView if it occurs
-		      about = tvAbout = new TextView(callingActivity);
+		      about = tvAbout = new TextView(callingActivity);		      
 		    }
+		    
+		    //ALSO LÖSUNG: Ziehe eine neue Textview in das layout. Mit der alten gab es Probleme.
+		    //TODO Goon 20160907: Lösung schön machen.
+		    
 		    //Set the about text
-		    tvAbout.setText(aboutText);
+		    CharSequence cs = "<html><body>AAAAAS</body></html>"; //CharSequence is an interface, and the String class implements CharSequence.		    
+		    tvAbout.setText(cs);
 		    
+		    //tvAbout.setText("hardcoded Text");
 		    // Now Linkify the text
-		    // Das entfernt irgendwie den normalen Text, oder ?       Linkify.addLinks(tvAbout, Linkify.ALL);
+		    // Das entfernt irgendwie den normalen Text, oder ?       
+		    Linkify.addLinks(tvAbout, Linkify.ALL);
+		    CharSequence test = tvAbout.getText();
+		    Log.d("FGLTEST", "Methode Show() aboutText = " + test);
 		    
-		    //Build and show the dialog
-		    new AlertDialog.Builder(callingActivity)
-		      .setTitle("About " + callingActivity.getString(R.string.app_name))
+		    //Build and show the dialog		    
+		    new AlertDialog.Builder(this.getCallingActivity())
+		      .setTitle("MyAbout " + this.getCallingActivity().getString(R.string.app_name))
 		      .setCancelable(true)
 		      .setIcon(R.drawable.ic_launcher)
-		      .setPositiveButton("OK", null)
+		      .setPositiveButton("MyOK", null)
 		      .setView(about)
 		      .show();    //Builder method returns allow for method chaining
 		  }
