@@ -12,7 +12,11 @@
     <string name="button_send_for_result">Send for result</string>
 
     <!-- About Box -->
-    <string name="action_about">Meine AboutBox</string>
+    <string name="action_about">About</string>
 <!--     <string name="about">This is our App, please see http://www.example.com. Email support at support@example.com.</string> -->
-    <string name="about">Test ohne urls</string>
+    <string name="about">Projekt für Tests und TryOuts:</string>
+    
+        <!-- Version Box -->
+    <string name="action_version">Version</string>
+    <string name="version">Historie:</string>
 </resources>

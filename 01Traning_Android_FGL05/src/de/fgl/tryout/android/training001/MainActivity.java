@@ -23,19 +23,28 @@ import android.widget.EditText;
  */
 public class MainActivity extends ActionBarActivity {
 	private String sMessageCurrent=null;
-	private MyVersionAboutBox versionAboutBox = null;
- 
-	public MyVersionAboutBox getVersionAboutBox() {
-		if(this.versionAboutBox==null){
-			MyVersionAboutBox a = new MyVersionAboutBox();
-			this.versionAboutBox = a;
+	private MyVersionBox versionBox = null;
+	private MyAboutBox aboutBox = null;
+	public MyVersionBox getVersionBox() {
+		if(this.versionBox==null){
+			MyVersionBox a = new MyVersionBox();
+			this.versionBox = a;
 		}
-		return this.versionAboutBox;
+		return this.versionBox;
 	}
 
-
-	public void setVersionAboutBox(MyVersionAboutBox versionAboutBox) {
-		this.versionAboutBox = versionAboutBox;
+	public void setVersionBox(MyVersionBox versionBox) {
+		this.versionBox = versionBox;
+	}	
+	public MyAboutBox getAboutBox() {
+		if(this.aboutBox==null){
+			MyAboutBox a = new MyAboutBox();
+			this.aboutBox = a;
+		}
+		return this.aboutBox;
+	}
+	public void setAboutBox(MyAboutBox AboutBox) {
+		this.aboutBox = aboutBox;
 	}
 
 
@@ -99,8 +108,12 @@ public class MainActivity extends ActionBarActivity {
 			//MyVersionHandler versionHandler = new MyVersionHandler();
 			//MyVersionAboutBox versionAboutBox = new MyVersionAboutBox(versionHandler);
 			//this.getVersionAboutBox().setVersionHandler(versionHandler);
-			this.getVersionAboutBox().Show(MainActivity.this);
+			this.getAboutBox().Show(MainActivity.this);
 			//versionAboutBox.Show(this);
+			
+		}
+		if(id== R.id.action_version){
+			this.getVersionBox().Show(MainActivity.this);
 			
 		}
 		return super.onOptionsItemSelected(item);

@@ -20,7 +20,7 @@ import android.widget.TextView;
  * @author Fritz Lindhauer
  *
  */
-public class MyVersionAboutBox { //extends AboutBox{ aber: Diese AboutBox ist so einfach nicht anpassbar genug
+public class MyVersionBox extends DialogBoxAlertOK{
 	 private MyVersionHandler versionHandler=null;
 	 
 	public MyVersionHandler getVersionHandler() {
@@ -34,21 +34,14 @@ public class MyVersionAboutBox { //extends AboutBox{ aber: Diese AboutBox ist so
 		this.versionHandler = versionHandler;
 	}
 
-	private Activity callingActivity = null;
-	 
-	private Activity getCallingActivity() {
-		return callingActivity;
-	}
+	
 
-	private void setCallingActivity(Activity callingActivity) {
-		this.callingActivity = callingActivity;
+	public MyVersionBox(){
+		super();
 	}
-
-	public MyVersionAboutBox(){
-		
-	}
-	public MyVersionAboutBox(MyVersionHandler objVersionHandler){
-		 this.setVersionHandler(objVersionHandler);
+	public MyVersionBox(MyVersionHandler objVersionHandler){
+		this();
+		this.setVersionHandler(objVersionHandler);
 	 }
 	 
 	 static String VersionName(Context context) {
@@ -62,8 +55,8 @@ public class MyVersionAboutBox { //extends AboutBox{ aber: Diese AboutBox ist so
 		  public void Show(Activity callingActivity) {
 			  this.setCallingActivity(callingActivity);
 			  
-			  String aboutText = this.computeVersionString();
-			  Log.d("FGLTEST", "Methode Show() aboutText = " + aboutText);
+			  String sVersion = this.computeVersionString();
+			  Log.d("FGLTEST", "Methode Show() versionText = " + sVersion);
 		      //SpannableString aboutTextSpannable = this.computeSpannableVersionString();
 			  
 		    //Generate views to pass to AlertDialog.Builder and to set the text
@@ -74,7 +67,7 @@ public class MyVersionAboutBox { //extends AboutBox{ aber: Diese AboutBox ist so
 		      //Inflate the custom view
 		      inflater = this.getCallingActivity().getLayoutInflater();
 		     // about = inflater.inflate(R.layout.aboutbox, (ViewGroup) callingActivity.findViewById(R.id.aboutView));
-		      about = inflater.inflate(R.layout.myversionaboutbox, (ViewGroup) this.getCallingActivity().findViewById(R.id.myAboutView));
+		      about = inflater.inflate(R.layout.dialogbox_alert_ok, (ViewGroup) this.getCallingActivity().findViewById(R.id.myAboutView));
 		      //tvAbout = (TextView) about.findViewById(R.id.myAboutText);		
 		      tvAbout = (TextView) about.findViewById(R.id.textView1);
 		    } catch(InflateException e) {
@@ -86,24 +79,20 @@ public class MyVersionAboutBox { //extends AboutBox{ aber: Diese AboutBox ist so
 		    //TODO Goon 20160907: Lösung schön machen.
 		    
 		    //Set the about text
-		    CharSequence cs = "<html><body>AAAAAS</body></html>"; //CharSequence is an interface, and the String class implements CharSequence.		    
-		    tvAbout.setText(cs);
+		    //CharSequence cs = "<html><body>AAAAAS</body></html>"; //CharSequence is an interface, and the String class implements CharSequence.		    
+		    //tvAbout.setText(cs);
+		    		  
+		    tvAbout.setText(sVersion);
 		    
 		    //tvAbout.setText("hardcoded Text");
 		    // Now Linkify the text
 		    // Das entfernt irgendwie den normalen Text, oder ?       
-		    Linkify.addLinks(tvAbout, Linkify.ALL);
-		    CharSequence test = tvAbout.getText();
-		    Log.d("FGLTEST", "Methode Show() aboutText = " + test);
+		    //Linkify.addLinks(tvAbout, Linkify.ALL);
+		    //CharSequence test = tvAbout.getText();
+		    //Log.d("FGLTEST", "Methode Show() aboutText = " + test);
 		    
-		    //Build and show the dialog		    
-		    new AlertDialog.Builder(this.getCallingActivity())
-		      .setTitle("MyAbout " + this.getCallingActivity().getString(R.string.app_name))
-		      .setCancelable(true)
-		      .setIcon(R.drawable.ic_launcher)
-		      .setPositiveButton("MyOK", null)
-		      .setView(about)
-		      .show();    //Builder method returns allow for method chaining
+		    //Build and show the dialog	
+		    super.show(about);		   
 		  }
 		  
 		  private String computeVersionString(){
