@@ -16,9 +16,17 @@
         android:title="@string/action_settings"
         app:showAsAction="never"/>
     
+    <!-- Version, should always be in the overflow -->
+    <item
+        android:id="@+id/action_version_html"
+        android:icon="@drawable/ic_action_version_html"
+        android:orderInCategory="98"
+        android:title="@string/action_version_html"
+        app:showAsAction="never"/>
+    
       <!-- Version, should always be in the overflow -->
     <item
-        android:id="@+id/action_version"
+        android:id="@+id/action_version_txt"
         android:icon="@drawable/ic_action_version"
         android:orderInCategory="99"
         android:title="@string/action_version"

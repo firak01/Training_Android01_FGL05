@@ -4,13 +4,14 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-      <!--     FGL: Weil mit dem SDK Manager die 23er Version installiert wurde, gibt es Fehlermeldungen. Darum die Version 23 hier als Zielversion eintragen -->
-<!--  	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="23" /> -->
+    <!-- FGL: Weil mit dem SDK Manager die 23er Version installiert wurde, gibt es Fehlermeldungen. Darum die Version 23 hier als Zielversion eintragen -->
+    <!-- <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="23" /> -->
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="23" />
 
-        <!-- FGL: 
+    <!--
+        FGL: 
         Es war notwendig android:theme hinzuzufügen auf Activity Ebene
         wenn man das auf Application Ebene entfernt.
         
@@ -20,15 +21,15 @@
 
 		Lösung:
 		In styles.xml verwende DarkActionBar
-		<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">		
--->
+		<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">		
+    -->
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppBaseTheme" >
         <activity
-            android:name="de.fgl.tryout.android.training001.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,9 +38,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="de.fgl.tryout.android.training001.DisplayMessageActivity"
+            android:name=".DisplayMessageActivity"
             android:label="@string/title_activity_display_message"
-            android:parentActivityName="de.fgl.tryout.android.training001.MainActivity" >
+            android:parentActivityName=".MainActivity" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -48,12 +49,19 @@
         </activity>
         <!-- FGL: Damit es aussieht wie ein Dialog, aber: Die Klasse der anzuzeigenden Activity muss von ActionBarActivity nach Activity geändert werden -->
         <!-- android:theme="@android:style/Theme.Dialog" -->
-        
-        <!-- FGL 20160727: Weiterentwicklung im ...FGL04 Projekt.
-             Diese Activity wird mit .createActivityForResult() aufgerufen. -->
+
+
+        <!--
+             FGL 20160727: Weiterentwicklung im ...FGL04 Projekt.
+             Diese Activity wird mit .createActivityForResult() aufgerufen.
+        -->
         <activity
-            android:name="de.fgl.tryout.android.training001.DisplayMessageActivityForResult"
+            android:name=".DisplayMessageActivityForResult"
             android:label="@string/title_activity_display_message_activity_for_result" >
+        </activity>
+        <activity
+            android:name=".DisplayWebviewActivityForVersion"
+            android:label="@string/title_activity_display_webview_activty_for_version" >
         </activity>
     </application>
 

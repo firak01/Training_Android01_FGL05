@@ -20,7 +20,8 @@ public class MyVersionHandler {
 	
 	
 	public String readFileVersionFromRawFGL(Activity callingActivity){
-		InputStreamReader is = new InputStreamReader(callingActivity.getResources().openRawResource(R.raw.version_fgl));
+		//InputStreamReader is = new InputStreamReader(callingActivity.getResources().openRawResource(R.raw.version_html_fgl));
+		InputStreamReader is = new InputStreamReader(callingActivity.getResources().openRawResource(R.raw.version_txt_fgl));
     	BufferedReader reader = new BufferedReader(is);
     	StringBuilder finalText = new StringBuilder();
     	String line;

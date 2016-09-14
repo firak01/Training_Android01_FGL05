@@ -24,6 +24,7 @@ import android.widget.EditText;
 public class MainActivity extends ActionBarActivity {
 	private String sMessageCurrent=null;
 	private MyVersionBox versionBox = null;
+	private MyVersionHtmlBox versionHtmlBox = null;
 	private MyAboutBox aboutBox = null;
 	public MyVersionBox getVersionBox() {
 		if(this.versionBox==null){
@@ -36,6 +37,19 @@ public class MainActivity extends ActionBarActivity {
 	public void setVersionBox(MyVersionBox versionBox) {
 		this.versionBox = versionBox;
 	}	
+	
+	public MyVersionHtmlBox getVersionHtmlBox() {
+		if(this.versionHtmlBox==null){
+			MyVersionHtmlBox a = new MyVersionHtmlBox();
+			this.versionHtmlBox = a;
+		}
+		return this.versionHtmlBox;
+	}
+
+	public void setVersionHtmlBox(MyVersionHtmlBox versionHtmlBox) {
+		this.versionHtmlBox = versionHtmlBox;
+	}	
+	
 	public MyAboutBox getAboutBox() {
 		if(this.aboutBox==null){
 			MyAboutBox a = new MyAboutBox();
@@ -112,10 +126,18 @@ public class MainActivity extends ActionBarActivity {
 			//versionAboutBox.Show(this);
 			
 		}
-		if(id== R.id.action_version){
-			this.getVersionBox().Show(MainActivity.this);
-			
+		if(id== R.id.action_version_txt){
+			//Darstellung der Version Box, basierend auf einem TextString
+			this.getVersionBox().Show(MainActivity.this);			
 		}
+		if(id==R.id.action_version_html){
+			//Darstellung der Version, als eigene Activity mit einer WebView, nur um das lauffähig zu bekommen.
+			//Vgl buch Android 4.4, S. 118
+			//final Intent intent = new Intent(this, DisplayWebviewActivityForVersion.class);
+			//startActivity(intent);
+			this.getVersionHtmlBox().Show(MainActivity.this);
+		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 	

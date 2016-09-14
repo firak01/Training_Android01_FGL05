@@ -13,10 +13,16 @@
 
     <!-- About Box -->
     <string name="action_about">About</string>
-<!--     <string name="about">This is our App, please see http://www.example.com. Email support at support@example.com.</string> -->
+    <!-- <string name="about">This is our App, please see http://www.example.com. Email support at support@example.com.</string> -->
     <string name="about">Projekt für Tests und TryOuts:</string>
-    
-        <!-- Version Box -->
-    <string name="action_version">Version</string>
+
+    <!-- Version Box -->
+    <string name="action_version">Version (TXT)</string>
     <string name="version">Historie:</string>
+    
+     <!-- Version Box - Per WebView-->
+    <string name="action_version_html">Version (HTML)</string>
+    <string name="version_html">Historie:</string>
+    <string name="title_activity_display_webview_activty_for_version">DisplayWebviewActivtyForVersion</string>
+
 </resources>
