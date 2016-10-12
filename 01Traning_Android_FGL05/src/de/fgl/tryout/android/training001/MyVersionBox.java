@@ -67,7 +67,7 @@ public class MyVersionBox extends DialogBoxAlertOK{
 		      //Inflate the custom view
 		      inflater = this.getCallingActivity().getLayoutInflater();
 		     // about = inflater.inflate(R.layout.aboutbox, (ViewGroup) callingActivity.findViewById(R.id.aboutView));
-		      about = inflater.inflate(R.layout.dialogbox_alert_ok, (ViewGroup) this.getCallingActivity().findViewById(R.id.myAboutView));
+		      about = inflater.inflate(R.layout.dialogbox_alert_ok, (ViewGroup) this.getCallingActivity().findViewById(R.id.myAboutBox));
 		      //tvAbout = (TextView) about.findViewById(R.id.myAboutText);		
 		      tvAbout = (TextView) about.findViewById(R.id.textView1);
 		    } catch(InflateException e) {

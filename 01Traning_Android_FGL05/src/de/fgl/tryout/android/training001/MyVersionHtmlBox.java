@@ -57,9 +57,13 @@ public class MyVersionHtmlBox extends DialogBoxAlertOK{
 		    try {
 		      //Inflate the custom view
 		      inflater = this.getCallingActivity().getLayoutInflater();
-		      about = inflater.inflate(R.layout.dialogbox_alert_html_ok, (ViewGroup) this.getCallingActivity().findViewById(R.id.myAboutView));
+		      about = inflater.inflate(R.layout.dialogbox_alert_html_ok, (ViewGroup) this.getCallingActivity().findViewById(R.id.myAboutBox));
 		      //tvAbout = (TextView) about.findViewById(R.id.myAboutText);		
 		      wvAbout = (WebView) about.findViewById(R.id.webView1);
+		      
+		      //Versuch die Scrollbar permanent zu machen.
+		      wvAbout.setScrollbarFadingEnabled(false);
+		      wvAbout.setScrollBarFadeDuration(0);
 		    } catch(InflateException e) {
 		      //Inflater can throw exception, unlikely but default to TextView if it occurs
 		      about = wvAbout = new WebView(callingActivity);		      
