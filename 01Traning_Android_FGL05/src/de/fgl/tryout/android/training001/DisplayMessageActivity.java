@@ -24,6 +24,7 @@ public class DisplayMessageActivity extends ActionBarActivity { //Activity
 	/**
 	 * @param message
 	 * 15.07.2016 08:26:09 Fritz Lindhauer
+	 * Test auf Änderungen
 	 */
 	private void setMessageCurrent(String message) {
 		this.sMessageCurrent= message;
