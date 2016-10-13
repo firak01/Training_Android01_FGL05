@@ -21,7 +21,7 @@
 
 		Lösung:
 		In styles.xml verwende DarkActionBar
-		<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">		
+		<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">		
     -->
     <application
         android:allowBackup="true"
@@ -53,7 +53,7 @@
 
         <!--
              FGL 20160727: Weiterentwicklung im ...FGL04 Projekt.
-             Diese Activity wird mit .createActivityForResult() aufgerufen.
+             Diese Activity wird mit .createActivityForResult() aufgerufen.
         -->
         <activity
             android:name=".DisplayMessageActivityForResult"
@@ -62,6 +62,10 @@
         <activity
             android:name=".DisplayWebviewActivityForVersion"
             android:label="@string/title_activity_display_webview_activty_for_version" >
+        </activity>
+        <activity
+            android:name=".DisplaySearchWebActivity"
+            android:label="@string/title_activity_display_search_web" >
         </activity>
     </application>
 

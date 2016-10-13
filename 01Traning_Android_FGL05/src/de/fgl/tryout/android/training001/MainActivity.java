@@ -201,6 +201,29 @@ public class MainActivity extends ActionBarActivity {
 	    }
 	} 
 	
+	
+	/**Starete eine Activity mit einer WebView. Dabei werfe den eingegebenen Text als Suchstring in die URL.
+	 * @param view
+	 * 13.10.2016 10:17:34 Fritz Lindhauer
+	 */
+	public void searchWeb(View view){
+		//Start an intent
+				Intent intent = new Intent(this, DisplaySearchWebActivity.class);
+				EditText editText = (EditText) findViewById(R.id.edit_message);
+				String message = editText.getText().toString();
+				
+				message = MyMessageHandler.createNormedMessage(message);
+				
+				//Besser als das Standard String.replace und Pattern zu verwenden ist hier die JAZKernel-Hilfsklasse		
+				Log.d("FGLSTATE", "searchWeb(): message nach der Normierung = " + message);
+				
+				//Speichere die message in eine lokale Variable. Grund: So kann man sie dann wegsichern wenn sich der State des Geräts ändert.
+				this.setMessageCurrent(message);
+						
+				intent.putExtra(MyMessageHandler.EXTRA_MESSAGE, message);
+				startActivity(intent);			
+	}
+	
 	/**
 	 * @param message
 	 * 15.07.2016 08:26:09 Fritz Lindhauer

@@ -17,18 +17,29 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/button_send"
         android:layout_weight="1"
         android:ems="10"
         android:hint="@string/edit_message" />
 
     <Button
+        android:id="@+id/button_search_web"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/edit_message"
+        android:layout_below="@+id/edit_message"
+        android:layout_marginTop="23dp"
+        android:onClick="searchWeb"
+        android:text="@string/button_search_web" />
+
+    <Button
         android:id="@+id/button_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/edit_message"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignBaseline="@+id/button_search_web"
+        android:layout_alignBottom="@+id/button_search_web"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@+id/button_search_web"
         android:layout_weight="0"
         android:onClick="sendMessage"
         android:text="@string/button_send" />
@@ -38,7 +49,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/button_send"
+        android:layout_alignLeft="@+id/button_send"
         android:layout_below="@+id/button_send"
         android:onClick="sendMessageForResult"
         android:text="@string/button_send_for_result" />
