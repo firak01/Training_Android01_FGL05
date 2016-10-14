@@ -2,6 +2,7 @@ package de.fgl.tryout.android.training001;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
 import android.app.Activity;
 import android.content.Intent;
@@ -18,7 +19,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.os.Build;
 
-public class DisplayMessageActivity extends ActionBarActivity { //Activity	
+
+// .... extends Activity
+//Damit eine Menüleiste angezeigt wird. Aber ActionBarActivity ist deprecated
+//public class DisplayMessageActivity extends ActionBarActivity {
+
+//AppCompatActivity wird wohl über die SupportBibiothek (V7) eingebunden.
+public class DisplayMessageActivity extends AppCompatActivity {
 	private String sMessageCurrent;
 	
 	/**

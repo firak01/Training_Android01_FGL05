@@ -7,6 +7,7 @@
     <string name="button_send">Send</string>
     <string name="title_activity_display_message">My Message with option menu</string>
     <string name="hello_world">Hello world!</string>
+    <string name="hello_world_fragment">Hello world Fragmented!</string>
     <string name="action_search">Meine suche</string>
     <string name="title_activity_display_message_activity_for_result">DisplayMessageActivityForResult</string>
     <string name="button_send_for_result">Send for result</string>
