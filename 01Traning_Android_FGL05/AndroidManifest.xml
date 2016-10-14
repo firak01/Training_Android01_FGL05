@@ -37,6 +37,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <!-- Damit eine Menüleiste angezeigt wird muss die Activity in der Java Klasse die ActionBarActivity extenden.
+             Desweiteren muss für den zurück Button oben die ParentActivity hier im Layout angegeben werden. -->
         <activity
             android:name=".DisplayMessageActivity"
             android:label="@string/title_activity_display_message"
@@ -59,13 +62,25 @@
             android:name=".DisplayMessageActivityForResult"
             android:label="@string/title_activity_display_message_activity_for_result" >
         </activity>
+        
+        
         <activity
             android:name=".DisplayWebviewActivityForVersion"
             android:label="@string/title_activity_display_webview_activty_for_version" >
         </activity>
+        
+        <!-- Ich will einen Zurueck - button in der menueleiste haben. 
+             Darum versuch wie bei displayMessageActivity einen parent Namen anzugeben. 
+             DAS Klappt-->
         <activity
             android:name=".DisplaySearchWebActivity"
-            android:label="@string/title_activity_display_search_web" >
+            android:label="@string/title_activity_display_search_web"
+            android:parentActivityName=".MainActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.fgl.tryout.android.training001.MainActivity" />
         </activity>
     </application>
 
