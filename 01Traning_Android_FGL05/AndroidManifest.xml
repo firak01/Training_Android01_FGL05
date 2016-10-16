@@ -23,11 +23,13 @@
 		In styles.xml verwende DarkActionBar
 		<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">		
     -->
+    <uses-permission android:name="android.permission.INTERNET" /><!-- FGL: 20161016 - Damit das WebSearch-Fragment auf das Internet zugreifen darf. Ohne das gibt es einen Fehler "net err cache misses" -->
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppBaseTheme" >
+        
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -81,7 +83,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.fgl.tryout.android.training001.MainActivity" />
-        </activity>
+        </activity>        
     </application>
 
 </manifest>

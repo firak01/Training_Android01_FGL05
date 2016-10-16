@@ -14,14 +14,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.os.Build;
 
 //public class DisplaySearchWebActivity extends Activity {
 
-//Damit eine Menüleiste angezeigt wird. Aber ActionBarActivity ist deprecated
+//Damit eine Menï¿½leiste angezeigt wird. Aber ActionBarActivity ist deprecated
 //public class DisplaySearchWebActivity extends ActionBarActivity {
 
-//AppCompatActivity wird wohl über die SupportBibiotheken eingebunden.
+//AppCompatActivity wird wohl ï¿½ber die SupportBibiotheken eingebunden.
 public class DisplaySearchWebActivity extends AppCompatActivity {
 
 	@Override
@@ -29,7 +30,7 @@ public class DisplaySearchWebActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_search_web);
 		
-		//SO WIRD DANN DAS FRAGMENT EINGEBUNDEN.
+		//SO WIRD DANN DAS FRAGMENT EINGEBUNDEN, WELCHES ALS INTERNE KLASSE HIER AUCH DEFINIERT IST.
 		//WENN DAS FRAGMENT ENTSPRECHEND DEFINIERT IST tools:context="de.fgl.tryout.android.training001.DisplaySearchWebActivity$PlaceholderFragment"
 		//MAN MAN MUSS DIE GEWUENSCHTEN LAYOUT-ELEMENTE AUS DER ACTIVITY IN DAS FRAGMENT VERSCHIEBEN UND DABEI BEACHTEN, DASS SIE IM FRAGEMENT in ANDEREN METHODEN DEFINIERT WERDEN.
 		if (savedInstanceState == null) {
@@ -72,43 +73,6 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 			//Style den Hintergrund			
 			actionBar.setBackgroundDrawable(new ColorDrawable(iColor)); // set your desired color
 			}
-			
-			/* PROBLEM
-			 * WIE Die Activity in das Framgent einbinden
-			 * Before you go merging you should probably know how a Fragment is composed versus an activity. (You have a sample HomeFragment.java!)
-
-    There is no setContentView method because you inflate your layout by overriding the onCreateView method.
-    There is no findViewById method, instead you find those references within onCreateView by calling findViewById on the View you inflated.
-    getApplicationContext() can be replaced by getActivity().getApplicationContext()
-
-			 */
-			//############################ Versuch die WebView zu füllen. Das muss dann wohl im Fragment gemacht werden.
-			/* Das wird in der Dialogbox About HTML gemacht
-			//Anders als bei den Txt-Dateien wird die HTML Datei nicht ausgelesen, sondern 1:1 angezeigt.
-			  
-		    //Generate views to pass to AlertDialog.Builder and to set the text
-		    View about;
-		    WebView wvAbout;
-		    LayoutInflater inflater = null;
-		    try {
-		      //Inflate the custom view
-		      inflater = this.getCallingActivity().getLayoutInflater();
-		      about = inflater.inflate(R.layout.dialogbox_alert_html_ok, (ViewGroup) this.getCallingActivity().findViewById(R.id.myAboutBox));
-		      //tvAbout = (TextView) about.findViewById(R.id.myAboutText);		
-		      wvAbout = (WebView) about.findViewById(R.id.webView1);
-		      
-		      //Versuch die Scrollbar permanent zu machen.
-		      wvAbout.setScrollbarFadingEnabled(false);
-		      wvAbout.setScrollBarFadeDuration(0);
-		    } catch(InflateException e) {
-		      //Inflater can throw exception, unlikely but default to TextView if it occurs
-		      about = wvAbout = new WebView(callingActivity);		      
-		    }
-		    
-		    //Hier den Text nicht setzen, sondern die WebView per WebKit initialisieren
-		    MyVersionHtmlHandler handler = this.getVersionHtmlHandler();
-		    handler.initialisiereWebKit(wvAbout);
-		    */
 		}
 		
 	}
@@ -133,7 +97,7 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 	}
 
 	/**
-	 * A placeholder fragment containing a simple view.
+	 * A placeholder fragment containing the SearchView
 	 */
 	public static class PlaceholderFragment extends Fragment {
 
@@ -145,7 +109,34 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(
 					R.layout.fragment_display_search_web, container, false);
+			Log.d("FGLTEST", "PlaceholderFrament.onCreateView() start.");
+			
+			//Hier, versuche die WebView zu fÃ¼llen
+			WebView wvSearch;
+			wvSearch = (WebView) rootView.findViewById(R.id.webView1);
+			
+			if(wvSearch!=null){
+				
+				  //Versuch die Scrollbar permanent zu machen.
+			      wvSearch.setScrollbarFadingEnabled(false);
+			      wvSearch.setScrollBarFadeDuration(0);
+			      
+			      //TODO: Den Inhalt der Suchanfrage per Bundle Ã¼bergeben.
+			      //TODO: DafÃ¼r sorgen, dass dies in der gleichen WebView gestartet wird und nicht in einem neuen Browserfenster.
+			      //wvSearch.loadUrl("https://www.google.de");
+			      wvSearch.loadUrl("https://www.google.de/search?q=android");
+				
+			}	
+			
 			return rootView;
 		}
+		
+		 @Override
+	    public void onActivityCreated(Bundle savedInstanceState) {
+			super.onActivityCreated(savedInstanceState);
+			
+			//Das wird ausgefÃ¼hrt. 
+			Log.d("FGLTEST", "PlaceholderFrament.onActivityCreated() start.");
+	    }
 	}
 }

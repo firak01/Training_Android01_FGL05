@@ -21,25 +21,25 @@ import android.os.Build;
 
 
 // .... extends Activity
-//Damit eine Menüleiste angezeigt wird. Aber ActionBarActivity ist deprecated
+//Damit eine Menï¿½leiste angezeigt wird. Aber ActionBarActivity ist deprecated
 //public class DisplayMessageActivity extends ActionBarActivity {
 
-//AppCompatActivity wird wohl über die SupportBibiothek (V7) eingebunden.
+//AppCompatActivity wird wohl ï¿½ber die SupportBibiothek (V7) eingebunden.
 public class DisplayMessageActivity extends AppCompatActivity {
 	private String sMessageCurrent;
 	
 	/**
 	 * @param message
 	 * 15.07.2016 08:26:09 Fritz Lindhauer
-	 * Test auf Änderungen
+	 * Test auf Ã„nderungen
 	 */
 	private void setMessageCurrent(String message) {
 		this.sMessageCurrent= message;
-		Log.d("FGLSTATE", this.getClass().getSimpleName()+". setMessageCurrent() für '" + message + "'");
+		Log.d("FGLSTATE", this.getClass().getSimpleName()+". setMessageCurrent() fï¿½r '" + message + "'");
 		
 	}
 	private String getMessageCurrent(){
-		Log.d("FGLSTATE", this.getClass().getSimpleName()+". getMessageCurrent() für '" + this.sMessageCurrent + "'");
+		Log.d("FGLSTATE", this.getClass().getSimpleName()+". getMessageCurrent() fï¿½r '" + this.sMessageCurrent + "'");
 		return this.sMessageCurrent;		
 	}
 	
@@ -108,7 +108,7 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 		}
 	}
 
-	//Wird für diese App nicht benötigt
+	//Wird fï¿½r diese App nicht benï¿½tigt
 //	@Override
 //	public boolean onCreateOptionsMenu(Menu menu) {
 //
@@ -131,34 +131,34 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 //		return super.onOptionsItemSelected(item);
 		
 		
-		//### Fang den "Zurück" Button der ActivityActionBar ab. #####
-		//Ziel: Übergib an die Ausgangsaktivität wieder den Wert. 
-		//a) Wenn über den Zurück-Button des Geräts gearbeitet wird, ist es nicht notwendig. 
+		//### Fang den "Zurï¿½ck" Button der ActivityActionBar ab. #####
+		//Ziel: ï¿½bergib an die Ausgangsaktivitï¿½t wieder den Wert. 
+		//a) Wenn ï¿½ber den Zurï¿½ck-Button des Gerï¿½ts gearbeitet wird, ist es nicht notwendig. 
 		//   Dann bleibt der Wert als Variable in der Activity vorhanden.
-		//b) Wenn über den Zurück-Button in der ActionBar gearbeitet wird, sind die Werte in onResume() nur entgegenzunehmen,
+		//b) Wenn ï¿½ber den Zurï¿½ck-Button in der ActionBar gearbeitet wird, sind die Werte in onResume() nur entgegenzunehmen,
 		//   durch einen Intent, in dem man den Wert speichert.
-		//c) IDEE: Versuche aus der Hauptaktivität mal die DisplayMessageActivity02 aufzurufen mit
+		//c) IDEE: Versuche aus der Hauptaktivitï¿½t mal die DisplayMessageActivity02 aufzurufen mit
 		//         startActivityForResult(). Vielleicht geht es dann einfacher.
 		//
 		if(id==16908332){
 			//If Abfrage, weil in der Switch-Case Anweisung der Vergleich nicht zu klappen scheint.
-			Log.d("FGLSTATE", "onOptionsItemSelected() für speziell definierte actionBarId gefunden.");
+			Log.d("FGLSTATE", "onOptionsItemSelected() fï¿½r speziell definierte actionBarId gefunden.");
 			
-			//Versuch X: Gib an die aufgerufene Funktion den Wert zurück
+			//Versuch X: Gib an die aufgerufene Funktion den Wert zurï¿½ck
     		Bundle bundle = new Bundle();
             bundle.putString(MyMessageHandler.RESUME_MESSAGE_BUNDLE, this.getMessageCurrent());
-            //natürlich nicht in den Intent Packen, der dieser Activity beim Start mitgegeben worden ist getIntent().putExtras(bundle);
+            //natï¿½rlich nicht in den Intent Packen, der dieser Activity beim Start mitgegeben worden ist getIntent().putExtras(bundle);
             
             //Start an intent mit dem Ziel diesen in der onResume Methpde entgegenzunehmen.
     		Intent intent = new Intent(this, MainActivity.class);	    		
     		intent.putExtras(bundle);
       		startActivity(intent); //Merke: Nachteil ist, das jeder Activity-Start quasi in eine History kommt. 
-      		                       //       Das bedeutet, dass der Zurück-Button des Geräts erst einmal alle Activities aus der Historie durchläuft,
-      		                       //       wenn man ihn in der Hauptmaske betätigt.
+      		                       //       Das bedeutet, dass der Zurï¿½ck-Button des Gerï¿½ts erst einmal alle Activities aus der Historie durchlï¿½uft,
+      		                       //       wenn man ihn in der Hauptmaske betï¿½tigt.
     		
 			
 		}else{
-			Log.d("FGLSTATE", "onOptionsItemSelected() für speziell definierte actionBarId NICHT gefunden.");
+			Log.d("FGLSTATE", "onOptionsItemSelected() fï¿½r speziell definierte actionBarId NICHT gefunden.");
 			
 			// Handle presses on the action bar items
 		    switch (id) {
@@ -169,16 +169,16 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 		            openSettings();
 		            return true;
 		        case R.id.home:
-		        	Log.d("FGLSTATE", "onOptionsItemSelected() für HOME item.id= '" + id + "'");
+		        	Log.d("FGLSTATE", "onOptionsItemSelected() fï¿½r HOME item.id= '" + id + "'");
 		        case R.id.homeAsUp:
-		        	Log.d("FGLSTATE", "onOptionsItemSelected() für HOMEASUP item.id= '" + id + "'");
+		        	Log.d("FGLSTATE", "onOptionsItemSelected() fï¿½r HOMEASUP item.id= '" + id + "'");
 		        case R.id.up:
-		        	Log.d("FGLSTATE", "onOptionsItemSelected() für HUP item.id= '" + id + "'");
+		        	Log.d("FGLSTATE", "onOptionsItemSelected() fï¿½r HUP item.id= '" + id + "'");
 		        case 16908332:
-		        	//DAS WIRD AUS iregendeinem Grund nicht ausgeführt. Darum in den if-Abfrage vorneweg verlagert.
-		        	Log.d("FGLSTATE", "onOptionsItemSelected() für speziell definierte actionBarId ohne in R-Klasse vohranden zu sein: item.id= '" + id + "'");	        		        
+		        	//DAS WIRD AUS iregendeinem Grund nicht ausgefï¿½hrt. Darum in den if-Abfrage vorneweg verlagert.
+		        	Log.d("FGLSTATE", "onOptionsItemSelected() fï¿½r speziell definierte actionBarId ohne in R-Klasse vohranden zu sein: item.id= '" + id + "'");	        		        
 		        default:
-		        	Log.d("FGLSTATE", "onOptionsItemSelected() für default item.id= '" + id + "'");
+		        	Log.d("FGLSTATE", "onOptionsItemSelected() fï¿½r default item.id= '" + id + "'");
 		            return super.onOptionsItemSelected(item);
 		    }
 		}
@@ -197,7 +197,7 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 		
 	}
 
-	//Folgendes wird nicht benötigt:
+	//Folgendes wird nicht benï¿½tigt:
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
@@ -215,7 +215,7 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 //		}
 //	}
 
-	//FGL für neue Buttons in der Action Bar notwendig
+	//FGL fï¿½r neue Buttons in der Action Bar notwendig
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    // Inflate the menu items for use in the action bar
@@ -224,6 +224,6 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 	    return super.onCreateOptionsMenu(menu);
 	}
 	
-	//FGL für die Reaktion auf neue Buttons in der ActionBar notwendig
+	//FGL fï¿½r die Reaktion auf neue Buttons in der ActionBar notwendig
 	
 }

@@ -10,28 +10,8 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TODO: Diese Activity soll ergänzt werden durch ein fragment in dem dann die WebView aufgerufen wird."
+        android:text="Diese Activity ist im Grunde nur für die Menüleiste da. Die WebView ist Bestandteil eines Fragments."
         android:textAppearance="?android:attr/textAppearanceSmall" />
-    
-
-    <ScrollView
-        android:id="@+id/mySearchWebBox"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <LinearLayout
-            android:id="@+id/mySearchWebView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <WebView
-                android:id="@+id/webView1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-    </ScrollView>
 
 </FrameLayout>
 
