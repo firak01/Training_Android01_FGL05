@@ -2,6 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="de.fgl.tryout.android.training001.DisplaySearchWebActivity" >
 
+     <item android:id="@+id/action_print"
+        android:title="@string/action_print"
+        android:showAsAction="never" />
+     
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

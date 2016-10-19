@@ -75,7 +75,7 @@
              Darum versuch wie bei displayMessageActivity einen parent Namen anzugeben. 
              DAS Klappt-->
         <activity
-            android:name=".DisplaySearchWebActivity"
+            android:name=".DisplayWebviewActivityForSearch"
             android:label="@string/title_activity_display_search_web"
             android:parentActivityName=".MainActivity" >
 

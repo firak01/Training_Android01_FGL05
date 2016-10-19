@@ -3,6 +3,7 @@ package de.fgl.tryout.android.training001;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ import android.os.Build;
 //public class DisplaySearchWebActivity extends ActionBarActivity {
 
 //AppCompatActivity wird wohl �ber die SupportBibiotheken eingebunden.
-public class DisplaySearchWebActivity extends AppCompatActivity {
+public class DisplayWebviewActivityForSearch extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +35,14 @@ public class DisplaySearchWebActivity extends AppCompatActivity {
 		//WENN DAS FRAGMENT ENTSPRECHEND DEFINIERT IST tools:context="de.fgl.tryout.android.training001.DisplaySearchWebActivity$PlaceholderFragment"
 		//MAN MAN MUSS DIE GEWUENSCHTEN LAYOUT-ELEMENTE AUS DER ACTIVITY IN DAS FRAGMENT VERSCHIEBEN UND DABEI BEACHTEN, DASS SIE IM FRAGEMENT in ANDEREN METHODEN DEFINIERT WERDEN.
 		if (savedInstanceState == null) {
+			//Merke: Das PlaceholderFragment ist hier ein interne Klasse. Code dafür siehe unten.
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 		
 		//++++++++++++++++++++++++++++++++++++++++++++++
+		//Den Hintergrund der Menüleiste steuern
+		// TODO: Das klappt noch nicht
 		//++++++++++++++++++++++++++++++++++++++++++++++
 				int iColor;
 				//String alarmMessagePrefix = "Alarm";
@@ -66,7 +70,7 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 				Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - action bar IS NULL.");
 				
 			}else{
-			Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - action bar not null.");
+			Log.d("FGLTEST", "Methode DisplayActivity.onCreate(..) - action bar not null.");
 			
 			actionBar.setDisplayHomeAsUpEnabled(true);
 			
@@ -93,14 +97,20 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 		if (id == R.id.action_settings) {
 			return true;
 		}
+		if (id == R.id.action_print){
+			Log.d("FGLTEST", "Methode DisplayActivityWebViewActivityForSearch.onOptionsItemSelected(..) - PRINT.");
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
 	/**
 	 * A placeholder fragment containing the SearchView
+	 * FGL: Dieser Code basiert auf "DisplayWebviewActivityForVersion", der Lösung für Dialogbox & Webview,
+	 *      welche Actity erweitert. Allerdings sind die im Fragment zu verwendenen Methoden andere, da das Fragement in einer Activity eingebunden ist.
 	 */
 	public static class PlaceholderFragment extends Fragment {
-
+		private MyWebViewClient objWebViewClient=new MyWebViewClient();
+		
 		public PlaceholderFragment() {
 		}
 
@@ -117,14 +127,30 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 			
 			if(wvSearch!=null){
 				
-				  //Versuch die Scrollbar permanent zu machen.
+				//Für Seiten mit JavaScript und CSS
+				wvSearch.getSettings().setJavaScriptEnabled(true);
+				
+				 //Versuch die Scrollbar permanent zu machen.
 			      wvSearch.setScrollbarFadingEnabled(false);
 			      wvSearch.setScrollBarFadeDuration(0);
+				
+			      if(objWebViewClient!=null){
+			        	wvSearch.setWebViewClient(this.objWebViewClient);
+				    }else{
+				    	
+				    };
+			      
+			      
+				initialisiereWebKit(wvSearch);
+				wvSearch.bringToFront();
+				
+				 
 			      
 			      //TODO: Den Inhalt der Suchanfrage per Bundle übergeben.
 			      //TODO: Dafür sorgen, dass dies in der gleichen WebView gestartet wird und nicht in einem neuen Browserfenster.
+			      //Das passiert nun in "initalisiere Webkit"
 			      //wvSearch.loadUrl("https://www.google.de");
-			      wvSearch.loadUrl("https://www.google.de/search?q=android");
+			      //wvSearch.loadUrl("https://www.google.de/search?q=android");
 				
 			}	
 			
@@ -138,5 +164,36 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 			//Das wird ausgeführt. 
 			Log.d("FGLTEST", "PlaceholderFrament.onActivityCreated() start.");
 	    }
+		 
+		 
+		 private void initialisiereWebKit(WebView view){
+				final String mimetype = "text/html";
+				final String encoding = "UTF-8";
+				String htmldata;
+				
+				//Anders als bei den Textdateien, kann so die WebViewer Datei nicht angezeigt werden.
+				//int contextMenueId = R.raw.version_html_fgl;		
+				//InputStream is = context.getResources().openRawResource(contextMenueId);
+				
+				 // Load the URL of the HTML file
+		        //view.loadUrl("file:///android_asset/version_html_fgl.html");
+				view.loadUrl("https://www.google.de/search?q=android");
+				
+				//try{
+				//	if (is != null && is.available() > 0) {
+				//		final byte[] bytes = new byte[is.available()];
+				//		is.read(bytes);
+				//		htmldata = new String(bytes);
+						//anders als .loadData kann die Methode loadDataWithBaseURL auch statische Webseiten verwenden.
+						//Merke: WebView hat aus Sicherheitsgr�nden strenge Einschr�nkungen, was darin funktioniert. (z.B. kein Zugriff auf Cookies oder BrowserCache)
+						//       
+				//		view.loadDataWithBaseURL(null, htmldata, mimetype, encoding, null);						
+				//	}
+				//} catch(IOException e){
+					
+					
+				//}
+				
+			}
 	}
 }

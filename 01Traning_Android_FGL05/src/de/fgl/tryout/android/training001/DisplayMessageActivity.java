@@ -158,7 +158,7 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
     		
 			
 		}else{
-			Log.d("FGLSTATE", "onOptionsItemSelected() f�r speziell definierte actionBarId NICHT gefunden.");
+			Log.d("FGLSTATE", "onOptionsItemSelected() für speziell definierte actionBarId NICHT gefunden.");
 			
 			// Handle presses on the action bar items
 		    switch (id) {
@@ -169,16 +169,16 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 		            openSettings();
 		            return true;
 		        case R.id.home:
-		        	Log.d("FGLSTATE", "onOptionsItemSelected() f�r HOME item.id= '" + id + "'");
+		        	Log.d("FGLSTATE", "onOptionsItemSelected() für HOME item.id= '" + id + "'");
 		        case R.id.homeAsUp:
-		        	Log.d("FGLSTATE", "onOptionsItemSelected() f�r HOMEASUP item.id= '" + id + "'");
+		        	Log.d("FGLSTATE", "onOptionsItemSelected() für HOMEASUP item.id= '" + id + "'");
 		        case R.id.up:
-		        	Log.d("FGLSTATE", "onOptionsItemSelected() f�r HUP item.id= '" + id + "'");
+		        	Log.d("FGLSTATE", "onOptionsItemSelected() für HUP item.id= '" + id + "'");
 		        case 16908332:
 		        	//DAS WIRD AUS iregendeinem Grund nicht ausgef�hrt. Darum in den if-Abfrage vorneweg verlagert.
-		        	Log.d("FGLSTATE", "onOptionsItemSelected() f�r speziell definierte actionBarId ohne in R-Klasse vohranden zu sein: item.id= '" + id + "'");	        		        
+		        	Log.d("FGLSTATE", "onOptionsItemSelected() für speziell definierte actionBarId ohne in R-Klasse vohranden zu sein: item.id= '" + id + "'");	        		        
 		        default:
-		        	Log.d("FGLSTATE", "onOptionsItemSelected() f�r default item.id= '" + id + "'");
+		        	Log.d("FGLSTATE", "onOptionsItemSelected() für default item.id= '" + id + "'");
 		            return super.onOptionsItemSelected(item);
 		    }
 		}

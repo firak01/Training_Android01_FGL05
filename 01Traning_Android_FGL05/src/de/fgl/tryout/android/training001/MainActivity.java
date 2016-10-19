@@ -73,19 +73,19 @@ public class MainActivity extends ActionBarActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		 } else {
-			//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerät verbunden sein.
+			//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das GerÃ¤t verbunden sein.
 			//     Merke: Hatte man ggfs. mehrere Emulatoren am Laufen, kann es sein, dass man alle beenden muss
 			//            und Eclipse neu starten muss.
 			Log.d("FGLSTATE", "onCreate() wurde aktiviert. MIT SAVEDINSTANCESTATE vorhanden");
 			 
-        	//Notwendiger Zweig um Persistierung zurückzuholen. Siehe auch onResume().
+        	//Notwendiger Zweig um Persistierung zurï¿½ckzuholen. Siehe auch onResume().
         	String sMessageCurrent = (String) savedInstanceState.getSerializable(MyMessageHandler.KEY_MESSAGE_CURRENT);
         	Log.d("FGLSTATE", "onCreate(): sMessageCurrent = " + sMessageCurrent);
 			
         	if(sMessageCurrent!=null){
 	        	this.setMessageCurrent(sMessageCurrent);
 	        	
-	        	//Sollte man nun irgendwie den String zurück-/einsetzen?
+	        	//Sollte man nun irgendwie den String zurÃ¼ck-/einsetzen?
 	        	EditText editText = (EditText) findViewById(R.id.edit_message);
 	    		editText.setText(sMessageCurrent + " (wiederhergestellt)");
         	}
@@ -118,7 +118,7 @@ public class MainActivity extends ActionBarActivity {
 			//Original (s.05_TryOut_AndroidCookbook_ .... ) aus einem Button einer Main-Activity-Klasse: AboutBox.Show(Main.this);
 			//AboutBox.Show(this);
 			
-			//20160906: Hole nun eine von mir überarbeitet Version
+			//20160906: Hole nun eine von mir ï¿½berarbeitet Version
 			//MyVersionHandler versionHandler = new MyVersionHandler();
 			//MyVersionAboutBox versionAboutBox = new MyVersionAboutBox(versionHandler);
 			//this.getVersionAboutBox().setVersionHandler(versionHandler);
@@ -131,7 +131,7 @@ public class MainActivity extends ActionBarActivity {
 			this.getVersionBox().Show(MainActivity.this);			
 		}
 		if(id==R.id.action_version_html){
-			//Darstellung der Version, als eigene Activity mit einer WebView, nur um das lauffähig zu bekommen.
+			//Darstellung der Version, als eigene Activity mit einer WebView, nur um das lauffï¿½hig zu bekommen.
 			//Vgl buch Android 4.4, S. 118
 			//final Intent intent = new Intent(this, DisplayWebviewActivityForVersion.class);
 			//startActivity(intent);
@@ -155,7 +155,7 @@ public class MainActivity extends ActionBarActivity {
 		message = StringZZZ.replace(message, MyMessageHandler.MESSAGE_ADDITION_RESULT,"");
 		Log.d("FGLSTATE", "sendessage(): message nach der Normierung = " + message);
 		
-		//Speichere die message in eine lokale Variable. Grund: So kann man sie dann wegsichern wenn sich der State des Geräts ändert.
+		//Speichere die message in eine lokale Variable. Grund: So kann man sie dann wegsichern wenn sich der State des Gerï¿½ts ï¿½ndert.
 		this.setMessageCurrent(message);
 				
 		intent.putExtra(MyMessageHandler.EXTRA_MESSAGE, message);
@@ -175,7 +175,7 @@ public class MainActivity extends ActionBarActivity {
 		//Besser als das Standard String.replace und Pattern zu verwenden ist hier die JAZKernel-Hilfsklasse		
 		Log.d("FGLSTATE", "sendessageForResult(): message nach der Normierung = " + message);
 		
-		//Speichere die message in eine lokale Variable. Grund: So kann man sie dann wegsichern wenn sich der State des Geräts ändert.
+		//Speichere die message in eine lokale Variable. Grund: So kann man sie dann wegsichern wenn sich der State des Gerï¿½ts ï¿½ndert.
 		this.setMessageCurrent(message);
 				
 		intent.putExtra(MyMessageHandler.EXTRA_MESSAGE, message);
@@ -208,7 +208,7 @@ public class MainActivity extends ActionBarActivity {
 	 */
 	public void searchWeb(View view){
 		//Start an intent
-				Intent intent = new Intent(this, DisplaySearchWebActivity.class);
+				Intent intent = new Intent(this, DisplayWebviewActivityForSearch.class);
 				EditText editText = (EditText) findViewById(R.id.edit_message);
 				String message = editText.getText().toString();
 				
@@ -217,7 +217,7 @@ public class MainActivity extends ActionBarActivity {
 				//Besser als das Standard String.replace und Pattern zu verwenden ist hier die JAZKernel-Hilfsklasse		
 				Log.d("FGLSTATE", "searchWeb(): message nach der Normierung = " + message);
 				
-				//Speichere die message in eine lokale Variable. Grund: So kann man sie dann wegsichern wenn sich der State des Geräts ändert.
+				//Speichere die message in eine lokale Variable. Grund: So kann man sie dann wegsichern wenn sich der State des Gerï¿½ts ï¿½ndert.
 				this.setMessageCurrent(message);
 						
 				intent.putExtra(MyMessageHandler.EXTRA_MESSAGE, message);
@@ -230,27 +230,27 @@ public class MainActivity extends ActionBarActivity {
 	 */
 	private void setMessageCurrent(String message) {
 		this.sMessageCurrent= message;
-		Log.d("FGLSTATE", "setMessageCurrent() für '" + message + "'");
+		Log.d("FGLSTATE", "setMessageCurrent() fï¿½r '" + message + "'");
 		
 	}
 	private String getMessageCurrent(){
-		Log.d("FGLSTATE", "getMessageCurrent() für '" + this.sMessageCurrent + "'");
+		Log.d("FGLSTATE", "getMessageCurrent() fï¿½r '" + this.sMessageCurrent + "'");
 		return this.sMessageCurrent;		
 	}
 
 	/* (non-Javadoc)
 	 * @see android.support.v4.app.FragmentActivity#onPause()
 	 * 
-	 * SHIFT+ALT+J ist die Tastenkombination für automatische Kommentare.
+	 * SHIFT+ALT+J ist die Tastenkombination fï¿½r automatische Kommentare.
 	 * Nun muss das entsprechene Template angepasst werden.
 	 *  
 	 */
 	@Override
 	public void onPause(){
 		super.onPause();
-		//FGL: Rufe beim Überschreiben dieser Event-Methoden IMMER die Methode der Elternklasse auf.
+		//FGL: Rufe beim ï¿½berschreiben dieser Event-Methoden IMMER die Methode der Elternklasse auf.
 		
-		//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerät verbunden sein.
+		//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerï¿½t verbunden sein.
 		//     Merke: Hatte man ggfs. mehrere Emulatoren am Laufen, kann es sein, dass man alle beenden muss
 		//            und Eclipse neu starten muss.
 		Log.d("FGLSTATE", "onPause() wurde aktiviert");
@@ -278,31 +278,31 @@ public class MainActivity extends ActionBarActivity {
 	 */
 	public void onResume(){
 		//super.onResume();
-		//FGL: Rufe beim Überschreiben dieser Event-Methoden IMMER die Methode der Elternklasse auf.
+		//FGL: Rufe beim ï¿½berschreiben dieser Event-Methoden IMMER die Methode der Elternklasse auf.
 		
-		//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerät verbunden sein.
+		//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerï¿½t verbunden sein.
 		//     Merke: Hatte man ggfs. mehrere Emulatoren am Laufen, kann es sein, dass man alle beenden muss
 		//            und Eclipse neu starten muss.
 		Log.d("FGLSTATE", "onResume() wurde aktiviert");
 		
 		
 		//Versuche einen gespeicherten Text wiederherszustellen.
-		//Merke: Beim einfachen Wechseln zurück wird dann nicht onCreate() aufgerufen, sondern onResume(), 
-		//       darum gehört der Code hierher, ABER: savedInstanceState ist hier nicht vorhanden.
+		//Merke: Beim einfachen Wechseln zurï¿½ck wird dann nicht onCreate() aufgerufen, sondern onResume(), 
+		//       darum gehï¿½rt der Code hierher, ABER: savedInstanceState ist hier nicht vorhanden.
     	//String sMessageCurrent = (String) savedInstanceState.getSerializable(KEY_MESSAGE_CURRENT);
     	//this.setMessageCurrent(sMessageCurrent);
     	
-		//Damit das funktioniert muss onRestoreInstanceState() ausgeführt werden und es muss die lokale Property wieder gefüllt worden sein.
+		//Damit das funktioniert muss onRestoreInstanceState() ausgefï¿½hrt werden und es muss die lokale Property wieder gefï¿½llt worden sein.
 		String sMessageCurrent = this.getMessageCurrent();
 		Log.d("FGLSTATE", "onResume(): Wert per Variable sMessageCurrent = " + sMessageCurrent);
 		
 		if(sMessageCurrent!=null){
-	    	//Sollte man nun irgendwie den String zurück-/einsetzen?
+	    	//Sollte man nun irgendwie den String zurï¿½ck-/einsetzen?
 	    	EditText editText = (EditText) findViewById(R.id.edit_message);
 			editText.setText(sMessageCurrent + MyMessageHandler.MESSAGE_ADDITION_VARIABLE);
 		}else{
-			//Das ist der Normalefall: Die Variable ist nämlich weg.
-			//Nun Versuch sie in inStop() über einen Intent.getExtras zu sichern und hier wiederherzustellen
+			//Das ist der Normalefall: Die Variable ist nï¿½mlich weg.
+			//Nun Versuch sie in inStop() ï¿½ber einen Intent.getExtras zu sichern und hier wiederherzustellen
 			sMessageCurrent=getIntent().getStringExtra(MyMessageHandler.RESUME_MESSAGE);
 			Log.d("FGLSTATE", "onResume(): Wert per intent sMessageCurrent = " + sMessageCurrent);
 			
@@ -329,15 +329,15 @@ public class MainActivity extends ActionBarActivity {
 	
 	public void onStop(){
 		//super.onStop();
-		//FGL: Rufe beim Überschreiben dieser Event-Methoden IMMER die Methode der Elternklasse auf.
+		//FGL: Rufe beim ï¿½berschreiben dieser Event-Methoden IMMER die Methode der Elternklasse auf.
 		
-		//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerät verbunden sein.
+		//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerï¿½t verbunden sein.
 				//     Merke: Hatte man ggfs. mehrere Emulatoren am Laufen, kann es sein, dass man alle beenden muss
 				//            und Eclipse neu starten muss.
 				Log.d("FGLSTATE", "onStop() wurde aktiviert");
 				
 				
-		//Versuche für onResume() den Stringwert zu retten, der dann in onResume() ausgelesen werden soll.
+		//Versuche fï¿½r onResume() den Stringwert zu retten, der dann in onResume() ausgelesen werden soll.
 				//ABER TODO GOON 20160715: Das klappt nicht!!!
 		EditText editText = (EditText) findViewById(R.id.edit_message);
 		String message = editText.getText().toString();			
@@ -351,7 +351,7 @@ public class MainActivity extends ActionBarActivity {
         bundle.putString(MyMessageHandler.RESUME_MESSAGE_BUNDLE, message);
         getIntent().putExtras(bundle);
         
-        //Versuch 3: Mit neuem Intent UND der überschriebenenen Methode onNewIntent()
+        //Versuch 3: Mit neuem Intent UND der ï¿½berschriebenenen Methode onNewIntent()
         Log.d("FGLSTATE", "onStop() - Sicher Message in NEUEM intent weg: " + message);
         //Intent intent = new Intent(this, MainActivity.class);
         Intent intent = new Intent();
@@ -365,9 +365,9 @@ public class MainActivity extends ActionBarActivity {
 	
 	public void onRestart(){
 		super.onRestart();
-		//FGL: Rufe beim Überschreiben dieser Event-Methoden IMMER die Methode der Elternklasse auf.
+		//FGL: Rufe beim ï¿½berschreiben dieser Event-Methoden IMMER die Methode der Elternklasse auf.
 		
-		//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerät verbunden sein.
+		//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerï¿½t verbunden sein.
 				//     Merke: Hatte man ggfs. mehrere Emulatoren am Laufen, kann es sein, dass man alle beenden muss
 				//            und Eclipse neu starten muss.
 				Log.d("FGLSTATE", "onRestart() wurde aktiviert");
@@ -375,9 +375,9 @@ public class MainActivity extends ActionBarActivity {
 	
 	public void onStart(){
 		super.onStart();
-		//FGL: Rufe beim Überschreiben dieser Event-Methoden IMMER die Methode der Elternklasse auf.
+		//FGL: Rufe beim ï¿½berschreiben dieser Event-Methoden IMMER die Methode der Elternklasse auf.
 		
-		//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerät verbunden sein.
+		//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerï¿½t verbunden sein.
 				//     Merke: Hatte man ggfs. mehrere Emulatoren am Laufen, kann es sein, dass man alle beenden muss
 				//            und Eclipse neu starten muss.
 				Log.d("FGLSTATE", "onStart() wurde aktiviert");
@@ -387,9 +387,9 @@ public class MainActivity extends ActionBarActivity {
 		
 		//NOTWENDIG ZUM PERSISTIERN DER DATEN IM BUNDLE
 				//super.onSaveInstanceState(outState);
-				//FGL: Rufe beim Überschreiben dieser Event-Methoden IMMER die Methode der Elternklasse auf.
+				//FGL: Rufe beim ï¿½berschreiben dieser Event-Methoden IMMER die Methode der Elternklasse auf.
 				
-				//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerät verbunden sein.
+				//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerï¿½t verbunden sein.
 						//     Merke: Hatte man ggfs. mehrere Emulatoren am Laufen, kann es sein, dass man alle beenden muss
 						//            und Eclipse neu starten muss.
 						Log.d("FGLSTATE", "onSaveInstanceState() wurde aktiviert");
@@ -409,9 +409,9 @@ public class MainActivity extends ActionBarActivity {
 		//Merke onResume() oder onStart() haben kein Bundle als Parameter
 		//Bei onResume() ... WIE KANN MAN DA DIE DATEN ZURUECKHOLEN?????
 		//super.onRestoreInstanceState(inState);
-		//FGL: Rufe beim Überschreiben dieser Event-Methoden IMMER die Methode der Elternklasse auf.
+		//FGL: Rufe beim ï¿½berschreiben dieser Event-Methoden IMMER die Methode der Elternklasse auf.
 		
-		//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerät verbunden sein.
+		//FGL: Versuch etwas in LogCat auszugeben. Dazu muss der Emulator/das Gerï¿½t verbunden sein.
 				//     Merke: Hatte man ggfs. mehrere Emulatoren am Laufen, kann es sein, dass man alle beenden muss
 				//            und Eclipse neu starten muss.
 				Log.d("FGLSTATE", "onRestoreInstanceState() wurde aktiviert");

@@ -27,5 +27,8 @@
     <string name="version_html">Historie:</string>
     <string name="title_activity_display_webview_activty_for_version">DisplayWebviewActivtyForVersion</string>
     <string name="title_activity_display_search_web">Web - Suchergebnis</string>
+    
+    <!-- Web - Suchseite  -->
+    <string name="action_print">Print</string>
 
 </resources>

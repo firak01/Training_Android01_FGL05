@@ -23,13 +23,13 @@ public class DisplayWebviewActivityForVersion extends Activity {
 		//WebView aus dem Layout holen
 		final WebView view = (WebView) findViewById(R.id.webView1);
 		
-		//F�r Seiten mit JavaScript und CSS
+		//Für Seiten mit JavaScript und CSS
 		view.getSettings().setJavaScriptEnabled(true);
 		initialisiereWebKit(view, this);
 		view.bringToFront();
 	}
 	
-	//Hinter der WebView steckt die WebKit Browserimplementierung f�r die Darstellung von Webseiten.
+	//Hinter der WebView steckt die WebKit Browserimplementierung für die Darstellung von Webseiten.
 	private void initialisiereWebKit(WebView view, Context context){
 		final String mimetype = "text/html";
 		final String encoding = "UTF-8";
@@ -38,17 +38,20 @@ public class DisplayWebviewActivityForVersion extends Activity {
 		//Anders als bei den Textdateien, kann so die WebViewer Datei nicht angezeigt werden.
 		//int contextMenueId = R.raw.version_html_fgl;		
 		//InputStream is = context.getResources().openRawResource(contextMenueId);
-		
-		 // Load the URL of the HTML file
+
+		//Hier sollen die Links in der HTML Datei in einem externen default Browser geöffnet werden. Darum nuten wir zum Anzeigen nicht den WebView-Client.
+		//Load the URL of the HTML file
+		//Merke: WebView hat aus Sicherheitsgründen strenge Einschränkungen, was darin funktioniert. (z.B. kein Zugriff auf Cookies oder BrowserCache)
         view.loadUrl("file:///android_asset/version_html_fgl.html");
-		
+        
+		//Merke: so würde eine selbst generierte HTML Seite geladen.
 		//try{
 		//	if (is != null && is.available() > 0) {
 		//		final byte[] bytes = new byte[is.available()];
 		//		is.read(bytes);
 		//		htmldata = new String(bytes);
 				//anders als .loadData kann die Methode loadDataWithBaseURL auch statische Webseiten verwenden.
-				//Merke: WebView hat aus Sicherheitsgr�nden strenge Einschr�nkungen, was darin funktioniert. (z.B. kein Zugriff auf Cookies oder BrowserCache)
+				//Merke: WebView hat aus Sicherheitsgründen strenge Einschränkungen, was darin funktioniert. (z.B. kein Zugriff auf Cookies oder BrowserCache)
 				//       
 		//		view.loadDataWithBaseURL(null, htmldata, mimetype, encoding, null);						
 		//	}
