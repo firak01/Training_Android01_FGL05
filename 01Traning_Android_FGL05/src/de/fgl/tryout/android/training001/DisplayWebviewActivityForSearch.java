@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.os.Build;
+import android.print.PrintManager;
 
 //public class DisplaySearchWebActivity extends Activity {
 
@@ -25,7 +26,9 @@ import android.os.Build;
 
 //AppCompatActivity wird wohl �ber die SupportBibiotheken eingebunden.
 public class DisplayWebviewActivityForSearch extends AppCompatActivity {
-
+	//Weil wir das Fragment später noch ansteuern wollen: Hier als private Variable deklarieren
+	PlaceholderFragment fragmentWebView = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,8 +39,22 @@ public class DisplayWebviewActivityForSearch extends AppCompatActivity {
 		//MAN MAN MUSS DIE GEWUENSCHTEN LAYOUT-ELEMENTE AUS DER ACTIVITY IN DAS FRAGMENT VERSCHIEBEN UND DABEI BEACHTEN, DASS SIE IM FRAGEMENT in ANDEREN METHODEN DEFINIERT WERDEN.
 		if (savedInstanceState == null) {
 			//Merke: Das PlaceholderFragment ist hier ein interne Klasse. Code dafür siehe unten.
+			//getFragmentManager().beginTransaction()
+			//		.add(R.id.container, new PlaceholderFragment()).commit();
+			
+			
+			//Nun erst das Fragment erstellen und in einer private Variablen speichern. Wir brauchen es späer noch.
+			fragmentWebView = new PlaceholderFragment();
 			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
+				.add(R.id.container, fragmentWebView)
+				.commit();
+			
+			
+			//hier werden Informationen an das Fragment übergeben.
+//			DetailsFragment details = new DetailsFragment();
+//            details.setArguments(getIntent().getExtras());
+//            getFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
+
 		}
 		
 		//++++++++++++++++++++++++++++++++++++++++++++++
@@ -99,9 +116,30 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 		}
 		if (id == R.id.action_print){
 			Log.d("FGLTEST", "Methode DisplayActivityWebViewActivityForSearch.onOptionsItemSelected(..) - PRINT.");
+			
+			//Idee aus Android SDK Legacy - API Demos - Bereich: API/APPS/printHTMLfromScreen.java  
+			print();
+            return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	 private void print() {
+	        // Get the print manager.
+	        PrintManager printManager = (PrintManager) getSystemService(
+	                Context.PRINT_SERVICE);
+	        //Hole aus dem gespeicherten Fragment die WebView.
+	        //getView holt quasi die Root des Fragments.
+	        //darauf aufbauend kann man dann die webView suchen.
+	        //View mWebView = fragmentWebView.getView().findViewById(R.id.webView1);
+	        WebView mWebView = (WebView) fragmentWebView.getView().findViewById(R.id.webView1);
+	        
+	        // Pass in the ViewView's document adapter.
+	        //createPrintDocumentAdapter ist deprecated: printManager.print("MotoGP stats", mWebView.createPrintDocumentAdapter(), null);
+	        //Nun wird der Benutzer gezwungen einen String für den Namen des Dokuments zu übergeben
+	        String sDocTitle = new String("mein_WebView_Ausdruck");
+	        printManager.print("MotoGP stats", mWebView.createPrintDocumentAdapter(sDocTitle), null);
+	    }
 
 	/**
 	 * A placeholder fragment containing the SearchView
