@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.os.Build;
 import android.print.PrintManager;
 
@@ -100,8 +101,25 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		Log.d("FGLTEST", "onCreateOptionsMenu() für DisplayWebViewActity aufgerufen.");
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.display_search_web, menu);
+		//Aber nur, wenn der WebView-Client meldet, dass die Seite schon geladen wurde.
+		//FGL Cool: Hier wird direkt auf die private Variable einer internen Klasse zugegriffen. .... Oder doch nicht... irgendeinen Grund wird der Fehler schon haben...
+		if(fragmentWebView==null){
+			Log.d("FGLTEST", "onCreateOptionsMenu() fragmentWebView ist NULL.");			
+		}else{
+			MyWebViewClient objWebViewClient = fragmentWebView.getWebViewClient();
+			if(objWebViewClient!=null){
+			    if (objWebViewClient.isDataLoaded()) {
+			    	Log.d("FGLTEST", "onCreateOptionsMenu() webViewClient meldet webSeite geladen.");
+			    	getMenuInflater().inflate(R.menu.display_search_web, menu);
+		        }else{
+		        	Log.d("FGLTEST", "onCreateOptionsMenu() webViewClient meldet webSeite (noch) nicht geladen.");
+		        }
+			}else{
+				Log.d("FGLTEST", "onCreateOptionsMenu() webViewClient ist NULL.");
+			}
+		}
 		return true;
 	}
 
@@ -147,7 +165,7 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 	 *      welche Actity erweitert. Allerdings sind die im Fragment zu verwendenen Methoden andere, da das Fragement in einer Activity eingebunden ist.
 	 */
 	public static class PlaceholderFragment extends Fragment {
-		private MyWebViewClient objWebViewClient=new MyWebViewClient();
+		private MyWebViewClient objWebViewClient=null;
 		
 		public PlaceholderFragment() {
 		}
@@ -155,6 +173,8 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
+			this.getWebViewClient();
+						
 			View rootView = inflater.inflate(
 					R.layout.fragment_display_search_web, container, false);
 			Log.d("FGLTEST", "PlaceholderFrament.onCreateView() start.");
@@ -233,5 +253,15 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 				//}
 				
 			}
-	}
+		 
+		 public MyWebViewClient getWebViewClient(){
+			 if(this.objWebViewClient == null){
+				 Log.d("FGLTEST", "PlaceholderFrament.getWebViewClient() erstelle neuen WebViewClient.");
+				 this.objWebViewClient = new MyWebViewClient();
+			 }else{
+				 Log.d("FGLTEST", "PlaceholderFrament.getWebViewClient() zugriff auf bestehenden WebViewClient.");
+			 }
+			 return this.objWebViewClient;
+		 }
+	}//END CLASS PLACEHOLDERFRAGMENT
 }
