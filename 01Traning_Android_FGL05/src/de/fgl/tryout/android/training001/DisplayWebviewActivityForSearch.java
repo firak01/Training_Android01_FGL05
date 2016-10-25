@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -22,18 +23,44 @@ import android.print.PrintManager;
 
 //public class DisplaySearchWebActivity extends Activity {
 
-//Damit eine Men�leiste angezeigt wird. Aber ActionBarActivity ist deprecated
+//Damit eine Menüleiste angezeigt wird. Aber ActionBarActivity ist deprecated
 //public class DisplaySearchWebActivity extends ActionBarActivity {
 
-//AppCompatActivity wird wohl �ber die SupportBibiotheken eingebunden.
+//AppCompatActivity wird wohl über die SupportBibiotheken eingebunden.
 public class DisplayWebviewActivityForSearch extends AppCompatActivity {
 	//Weil wir das Fragment später noch ansteuern wollen: Hier als private Variable deklarieren
 	PlaceholderFragment fragmentWebView = null;
+	private String sMessageCurrent;
+	
+	/**
+	 * @param message
+	 * 15.07.2016 08:26:09 Fritz Lindhauer
+	 * Test auf Änderungen
+	 */
+	private void setMessageCurrent(String message) {
+		this.sMessageCurrent= message;
+		Log.d("FGLSTATE", this.getClass().getSimpleName()+". setMessageCurrent() f�r '" + message + "'");
+		
+	}
+	private String getMessageCurrent(){
+		Log.d("FGLSTATE", this.getClass().getSimpleName()+". getMessageCurrent() f�r '" + this.sMessageCurrent + "'");
+		return this.sMessageCurrent;		
+	}
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_search_web);
+		
+		//++++++++++++++++++++++++++++++++++++++++++++++
+		// Get the message from the intent
+		Intent intent = getIntent();
+		String message = intent.getStringExtra(MyMessageHandler.EXTRA_MESSAGE);
+		Log.d("FGLTEST", this.getClass().getSimpleName()+". getMessageCurrent() für die Suche '" + message + "'");
+		this.setMessageCurrent(message);
+		//++++++++++++++++++++++++++++++++++++++++++++++
+		
 		
 		//SO WIRD DANN DAS FRAGMENT EINGEBUNDEN, WELCHES ALS INTERNE KLASSE HIER AUCH DEFINIERT IST.
 		//WENN DAS FRAGMENT ENTSPRECHEND DEFINIERT IST tools:context="de.fgl.tryout.android.training001.DisplaySearchWebActivity$PlaceholderFragment"
@@ -49,8 +76,7 @@ public class DisplayWebviewActivityForSearch extends AppCompatActivity {
 			getFragmentManager().beginTransaction()
 				.add(R.id.container, fragmentWebView)
 				.commit();
-			
-			
+						
 			//hier werden Informationen an das Fragment übergeben.
 //			DetailsFragment details = new DetailsFragment();
 //            details.setArguments(getIntent().getExtras());
@@ -79,7 +105,7 @@ public class DisplayWebviewActivityForSearch extends AppCompatActivity {
 //					//Style den Hintergrund		
 //					actionBar.setBackgroundDrawable(new ColorDrawable(iColor)); // set your desired color
 		}else{
-Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or higher.");
+			Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or higher.");
 			
 			// If your minSdkVersion is 11 or higher, instead use:
 			android.app.ActionBar actionBar = getActionBar();
@@ -144,8 +170,8 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 	
 	 private void print() {
 	        // Get the print manager.
-	        PrintManager printManager = (PrintManager) getSystemService(
-	                Context.PRINT_SERVICE);
+	        PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
+	        
 	        //Hole aus dem gespeicherten Fragment die WebView.
 	        //getView holt quasi die Root des Fragments.
 	        //darauf aufbauend kann man dann die webView suchen.
@@ -224,19 +250,26 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 	    }
 		 
 		 
-		 private void initialisiereWebKit(WebView view){
-				final String mimetype = "text/html";
-				final String encoding = "UTF-8";
-				String htmldata;
-				
+		 private void initialisiereWebKit(WebView view, String sSearch){				
+				view.loadUrl("https://www.google.de/search?q="+sSearch);				
+			}
+		 
+		 private void initialisiereWebKit(WebView view){							
+				//hole den Suchstring 
+				// Activity ac = (Activity) view.getContext();
+				DisplayWebviewActivityForSearch ac = (DisplayWebviewActivityForSearch) view.getContext();
+				String sSearch = ac.getMessageCurrent();
+				Log.d("FGLTEST", "initialisiereWebKit mit Suchstring: " + sSearch);
+								
+				//+++ Variante 1)
 				//Anders als bei den Textdateien, kann so die WebViewer Datei nicht angezeigt werden.
 				//int contextMenueId = R.raw.version_html_fgl;		
 				//InputStream is = context.getResources().openRawResource(contextMenueId);
-				
-				 // Load the URL of the HTML file
-		        //view.loadUrl("file:///android_asset/version_html_fgl.html");
-				view.loadUrl("https://www.google.de/search?q=android");
-				
+								
+				//+++ Variante 2)
+				//final String mimetype = "text/html";
+				//final String encoding = "UTF-8";
+				//String htmldata;				
 				//try{
 				//	if (is != null && is.available() > 0) {
 				//		final byte[] bytes = new byte[is.available()];
@@ -247,11 +280,15 @@ Log.d("FGLTEST", "Methode sDisplayActivity.onCreate(..) - minSdkVersion is 11 or
 						//       
 				//		view.loadDataWithBaseURL(null, htmldata, mimetype, encoding, null);						
 				//	}
-				//} catch(IOException e){
-					
-					
+				//} catch(IOException e){									
 				//}
 				
+				//+++ Variante 3)
+				// Load the URL of the HTML file
+		        //view.loadUrl("file:///android_asset/version_html_fgl.html");
+				//view.loadUrl("https://www.google.de/search?q=android");
+				
+				initialisiereWebKit(view, sSearch);							
 			}
 		 
 		 public MyWebViewClient getWebViewClient(){

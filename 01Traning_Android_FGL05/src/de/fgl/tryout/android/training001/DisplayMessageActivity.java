@@ -53,6 +53,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
 		String message = intent.getStringExtra(MyMessageHandler.EXTRA_MESSAGE);
 		this.setMessageCurrent(message);
 		//++++++++++++++++++++++++++++++++++++++++++++++
+		
+		//FGL: TODO - Das mit dem Ändern der Farbe funktioniert nicht
 		int iColor;
 		String alarmMessagePrefix = "Alarm";
 		if(message.startsWith(alarmMessagePrefix)){

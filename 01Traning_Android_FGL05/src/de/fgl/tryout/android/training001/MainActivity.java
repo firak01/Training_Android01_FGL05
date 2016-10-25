@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,7 +22,7 @@ import android.widget.EditText;
  * @author Fritz Lindhauer
  *
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends  AppCompatActivity{ // ActionBarActivity { //Merke: ActionBarActivity is deprecated
 	private String sMessageCurrent=null;
 	private MyVersionBox versionBox = null;
 	private MyVersionHtmlBox versionHtmlBox = null;
@@ -57,7 +58,7 @@ public class MainActivity extends ActionBarActivity {
 		}
 		return this.aboutBox;
 	}
-	public void setAboutBox(MyAboutBox AboutBox) {
+	public void setAboutBox(MyAboutBox aboutBox) {
 		this.aboutBox = aboutBox;
 	}
 
@@ -78,7 +79,7 @@ public class MainActivity extends ActionBarActivity {
 			//            und Eclipse neu starten muss.
 			Log.d("FGLSTATE", "onCreate() wurde aktiviert. MIT SAVEDINSTANCESTATE vorhanden");
 			 
-        	//Notwendiger Zweig um Persistierung zur�ckzuholen. Siehe auch onResume().
+        	//Notwendiger Zweig um Persistierung zurückzuholen. Siehe auch onResume().
         	String sMessageCurrent = (String) savedInstanceState.getSerializable(MyMessageHandler.KEY_MESSAGE_CURRENT);
         	Log.d("FGLSTATE", "onCreate(): sMessageCurrent = " + sMessageCurrent);
 			
@@ -88,10 +89,9 @@ public class MainActivity extends ActionBarActivity {
 	        	//Sollte man nun irgendwie den String zurück-/einsetzen?
 	        	EditText editText = (EditText) findViewById(R.id.edit_message);
 	    		editText.setText(sMessageCurrent + " (wiederhergestellt)");
-        	}
-        	
+        	}        	
         }
-	}
+	}//END MainActivity.onCreate(...)
 	
 	
 	@Override
@@ -118,7 +118,7 @@ public class MainActivity extends ActionBarActivity {
 			//Original (s.05_TryOut_AndroidCookbook_ .... ) aus einem Button einer Main-Activity-Klasse: AboutBox.Show(Main.this);
 			//AboutBox.Show(this);
 			
-			//20160906: Hole nun eine von mir �berarbeitet Version
+			//20160906: Hole nun eine von mir überarbeitet Version
 			//MyVersionHandler versionHandler = new MyVersionHandler();
 			//MyVersionAboutBox versionAboutBox = new MyVersionAboutBox(versionHandler);
 			//this.getVersionAboutBox().setVersionHandler(versionHandler);
@@ -206,7 +206,7 @@ public class MainActivity extends ActionBarActivity {
 	 * @param view
 	 * 13.10.2016 10:17:34 Fritz Lindhauer
 	 */
-	public void searchWeb(View view){
+	public void sendMessageToSearchWeb(View view){
 		//Start an intent
 				Intent intent = new Intent(this, DisplayWebviewActivityForSearch.class);
 				EditText editText = (EditText) findViewById(R.id.edit_message);

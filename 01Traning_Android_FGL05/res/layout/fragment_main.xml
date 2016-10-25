@@ -29,7 +29,7 @@
         android:layout_alignLeft="@+id/edit_message"
         android:layout_below="@+id/edit_message"
         android:layout_marginTop="23dp"
-        android:onClick="searchWeb"
+        android:onClick="sendMessageToSearchWeb"
         android:text="@string/button_search_web" />
 
     <Button
