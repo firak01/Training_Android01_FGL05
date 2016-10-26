@@ -72,7 +72,10 @@ public class DisplayWebviewActivityForSearch extends AppCompatActivity {
 			
 			
 			//Nun erst das Fragment erstellen und in einer private Variablen speichern. Wir brauchen es späer noch.
-			fragmentWebView = new PlaceholderFragment();
+			fragmentWebView = new PlaceholderFragment();					
+			fragmentWebView.setRetainInstance(true);//FGL Das soll verhindern, dass sich die WebView neu lädt, wenn das Gerät gedreht wird mit (Strg + F12). Technisch gesehen wird es - wie ich es verstanden habe - beim Refresh der Activity aus dem Baum genommen und wieder angehängt.
+			//funktioniert an dieser Stelle nicht. mal woanders ausprobieren. Nur wo?
+			
 			getFragmentManager().beginTransaction()
 				.add(R.id.container, fragmentWebView)
 				.commit();
@@ -132,8 +135,19 @@ public class DisplayWebviewActivityForSearch extends AppCompatActivity {
 		//Aber nur, wenn der WebView-Client meldet, dass die Seite schon geladen wurde.
 		//FGL Cool: Hier wird direkt auf die private Variable einer internen Klasse zugegriffen. .... Oder doch nicht... irgendeinen Grund wird der Fehler schon haben...
 		if(fragmentWebView==null){
-			Log.d("FGLTEST", "onCreateOptionsMenu() fragmentWebView ist NULL.");			
-		}else{
+			//DAS passiert beispielsweise, wenn die Orientierung des Geräts geändert wird (STRG + F12)
+			Log.d("FGLTEST", "onCreateOptionsMenu() fragmentWebView ist NULL.");
+			
+			//Lösungsansatz: Hole fragmentWebView nun per FragmentManager. Es soltle da sein und nicht neu gemacht werden müssen.
+			fragmentWebView = (PlaceholderFragment) getFragmentManager().findFragmentById(R.id.container);
+			if(fragmentWebView==null){				
+				Log.d("FGLTEST", "onCreateOptionsMenu() fragmentWebView bleibt auch nach Suche über FragmentManager NULL.");
+			}else{
+				Log.d("FGLTEST", "onCreateOptionsMenu() fragmentWebView erfolgreich gefunden per Suche über FragmentManager.");				
+			}
+		}
+		
+		if(fragmentWebView!=null){
 			MyWebViewClient objWebViewClient = fragmentWebView.getWebViewClient();
 			if(objWebViewClient!=null){
 			    if (objWebViewClient.isDataLoaded()) {
@@ -196,6 +210,16 @@ public class DisplayWebviewActivityForSearch extends AppCompatActivity {
 		public PlaceholderFragment() {
 		}
 
+		
+		// this method is only called once for this fragment
+	    @Override
+	    public void onCreate(Bundle savedInstanceState) {
+	        super.onCreate(savedInstanceState);
+	        // retain this fragment //FGL Versuche die WebView nicht neu zu laden, wenn man die Orientierung des Geräts ändert.
+	        setRetainInstance(true);
+	    }
+
+		
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
