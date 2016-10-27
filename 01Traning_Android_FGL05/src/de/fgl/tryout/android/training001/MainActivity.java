@@ -284,11 +284,10 @@ public class MainActivity extends  AppCompatActivity{ // ActionBarActivity { //M
 		//     Merke: Hatte man ggfs. mehrere Emulatoren am Laufen, kann es sein, dass man alle beenden muss
 		//            und Eclipse neu starten muss.
 		Log.d("FGLSTATE", "onResume() wurde aktiviert");
-		
-		
+				
 		//Versuche einen gespeicherten Text wiederherszustellen.
-		//Merke: Beim einfachen Wechseln zur�ck wird dann nicht onCreate() aufgerufen, sondern onResume(), 
-		//       darum geh�rt der Code hierher, ABER: savedInstanceState ist hier nicht vorhanden.
+		//Merke: Beim einfachen Wechseln zurück wird dann nicht onCreate() aufgerufen, sondern onResume(), 
+		//       darum gehört der Code hierher, ABER: savedInstanceState ist hier nicht vorhanden.
     	//String sMessageCurrent = (String) savedInstanceState.getSerializable(KEY_MESSAGE_CURRENT);
     	//this.setMessageCurrent(sMessageCurrent);
     	
@@ -296,32 +295,35 @@ public class MainActivity extends  AppCompatActivity{ // ActionBarActivity { //M
 		String sMessageCurrent = this.getMessageCurrent();
 		Log.d("FGLSTATE", "onResume(): Wert per Variable sMessageCurrent = " + sMessageCurrent);
 		
-		if(sMessageCurrent!=null){
-	    	//Sollte man nun irgendwie den String zur�ck-/einsetzen?
-	    	EditText editText = (EditText) findViewById(R.id.edit_message);
-			editText.setText(sMessageCurrent + MyMessageHandler.MESSAGE_ADDITION_VARIABLE);
+		if(!StringZZZ.isEmptyNull(sMessageCurrent)&& !StringZZZ.isBlank(sMessageCurrent) & !StringZZZ.isWhitespace(sMessageCurrent)){
+			//1. Variante: Als Variable
+			EditText editText = (EditText) findViewById(R.id.edit_message);
+			editText.setText(sMessageCurrent + MyMessageHandler.MESSAGE_ADDITION_VARIABLE);			
 		}else{
-			//Das ist der Normalefall: Die Variable ist n�mlich weg.
-			//Nun Versuch sie in inStop() �ber einen Intent.getExtras zu sichern und hier wiederherzustellen
+			//2. Variante als "StringExtra"			
+			//Das ist der Normalefall: Die Variable ist nämlich weg.
+			//Nun Versuch sie in inStop() über einen Intent.getExtras zu sichern und hier wiederherzustellen
 			sMessageCurrent=getIntent().getStringExtra(MyMessageHandler.RESUME_MESSAGE);
-			Log.d("FGLSTATE", "onResume(): Wert per intent sMessageCurrent = " + sMessageCurrent);
-			
-			//DAS FUNKTIONIERT AUCH NICHT!!!
-			if(sMessageCurrent!=null){
+			Log.d("FGLSTATE", "onResume(): Wert per intent sMessageCurrent = " + sMessageCurrent);			
+					
+			if(!StringZZZ.isEmptyNull(sMessageCurrent)&& !StringZZZ.isBlank(sMessageCurrent) & !StringZZZ.isWhitespace(sMessageCurrent)){
+				//DAS FUNKTIONIERT GGFS. AUCH NICHT!!!
 				EditText editText = (EditText) findViewById(R.id.edit_message);
 				editText.setText(sMessageCurrent + MyMessageHandler.MESSAGE_ADDITION_INTENT);
 			}else{
+				//3. Variante: Als Bundle aus getExras()
 				Bundle bundle = getIntent().getExtras();
 				if(bundle!=null){
 					sMessageCurrent = bundle.getString(MyMessageHandler.RESUME_MESSAGE_BUNDLE);
 					Log.d("FGLSTATE", "onResume(): Wert per intent und bundle sMessageCurrent = " + sMessageCurrent);
 					
-					EditText editText = (EditText) findViewById(R.id.edit_message);
-					editText.setText(sMessageCurrent + MyMessageHandler.MESSAGE_ADDITION_BUNDLE);
+					if(!StringZZZ.isEmptyNull(sMessageCurrent)&& !StringZZZ.isBlank(sMessageCurrent) & !StringZZZ.isWhitespace(sMessageCurrent)){
+						EditText editText = (EditText) findViewById(R.id.edit_message);
+						editText.setText(sMessageCurrent + MyMessageHandler.MESSAGE_ADDITION_BUNDLE);
+					}
 				}else{
-					Log.d("FGLSTATE", "onResume(): Bundle ist auch im neuen intent leer");
-					
-				}
+					Log.d("FGLSTATE", "onResume(): Bundle ist auch im neuen intent leer");				
+				}			
 			}
 		}
 		super.onResume();
