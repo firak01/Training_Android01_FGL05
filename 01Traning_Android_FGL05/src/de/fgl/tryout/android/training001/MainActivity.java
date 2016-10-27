@@ -83,7 +83,7 @@ public class MainActivity extends  AppCompatActivity{ // ActionBarActivity { //M
         	String sMessageCurrent = (String) savedInstanceState.getSerializable(MyMessageHandler.KEY_MESSAGE_CURRENT);
         	Log.d("FGLSTATE", "onCreate(): sMessageCurrent = " + sMessageCurrent);
 			
-        	if(sMessageCurrent!=null){
+        	if(!StringZZZ.isEmptyNull(sMessageCurrent)&& !StringZZZ.isBlank(sMessageCurrent) & !StringZZZ.isWhitespace(sMessageCurrent)){
 	        	this.setMessageCurrent(sMessageCurrent);
 	        	
 	        	//Sollte man nun irgendwie den String zurück-/einsetzen?
